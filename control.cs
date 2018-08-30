@@ -33,23 +33,6 @@ public class control : MonoBehaviour
         rbody.velocity = new Vector3(moveX, 0f, moveZ);
     }
 
-    void FixedUpdate()
-    {
-        float lh = Input.GetAxisRaw("Horizontal");
-        float lv = Input.GetAxisRaw("Vertical");
-
-    }
-
-    void Rotating(float lh, float lv)
-    {
-        Vector3 targetDirection = new Vector3(lh, 0f, lv);
-
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
-
-        Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, turnSmoothing * Time.deltaTime);
-       
-        GetComponent<Rigidbody>().MoveRotation(newRotation);
-    }
 
 
 }
