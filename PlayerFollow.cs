@@ -5,33 +5,28 @@ using UnityEngine;
 public class PlayerFollow : MonoBehaviour {
 
     public Transform PlayerTransform;
-    private Vector3 _cameraOffset;
-    [Range(0.01f, 1.0f)]
+    private Vector3 distancia;
     public float SmoothFactor = 0.5f;
     public float turnSmoothing = 15f;
-
-
+    public GameObject jugador;
+    public GameObject referencia;
 
     // Use this for initialization
     void Start () {
-        _cameraOffset = transform.position - PlayerTransform.position;
-	}
-	
-	// LateUpdate is called atfer update
-	void LateUpdate () {
-        Vector3 newPos = PlayerTransform.position + _cameraOffset;
-        transform.position = Vector3.Slerp(transform.position, newPos, SmoothFactor);
-
+        distancia = transform.position - jugador.transform.position;
 	}
 
-    void Rotating(float lh, float lv)
+    void LateUpdate()
     {
-        Vector3 targetDirection = new Vector3(lh, 0f, lv);
+        distancia = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 2, Vector3.up) * distancia;
+        //transform.position = jugador.transform.position + distancia;
+        //transform.LookAt(jugador.transform.position);
 
-        Quaternion targetRotation = Quaternion.LookRotation(targetDirection, Vector3.up);
+        //Referencia de controles
 
-        Quaternion newRotation = Quaternion.Lerp(GetComponent<Rigidbody>().rotation, targetRotation, turnSmoothing * Time.deltaTime);
+        Vector3 copiaRotacion = new Vector3(0, transform.eulerAngles.y, 0);
+        referencia.transform.eulerAngles = copiaRotacion;
 
-        GetComponent<Rigidbody>().MoveRotation(newRotation);
     }
+
 }
