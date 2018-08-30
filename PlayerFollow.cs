@@ -19,8 +19,8 @@ public class PlayerFollow : MonoBehaviour {
     void LateUpdate()
     {
         distancia = Quaternion.AngleAxis(Input.GetAxis("Mouse X") * 2, Vector3.up) * distancia;
-        //transform.position = jugador.transform.position + distancia;
-        //transform.LookAt(jugador.transform.position);
+        transform.position = jugador.transform.position + distancia;
+        transform.LookAt(jugador.transform.position);
 
         //Referencia de controles
 
