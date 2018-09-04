@@ -13,7 +13,8 @@ public class control : MonoBehaviour
     public Rigidbody rbody;
     public float turnSmoothing = 15f;
     public float maxSpeed;
-    public GameObject referencia; 
+    public GameObject referencia;
+    public Transform target;
 
     void Start()
     {
@@ -24,6 +25,8 @@ public class control : MonoBehaviour
 
     void FixedUpdate()
     {
+        transform.LookAt(target);
+
         inputH = Input.GetAxis("Horizontal");
         inputV = Input.GetAxis("Vertical");
 
@@ -37,9 +40,6 @@ public class control : MonoBehaviour
         anim.SetFloat("inputH", inputH);
         anim.SetFloat("inputV", inputV);
 
-        //float moveX = inputH * 20f * Time.deltaTime;
-        //float moveZ = inputV * 50f * Time.deltaTime;
-        //rbody.velocity = new Vector3(moveX, 0f, moveZ);
     }
 
 
